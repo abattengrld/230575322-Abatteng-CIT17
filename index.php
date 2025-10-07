@@ -26,7 +26,7 @@ echo "The area of a rectangle with the length of $length and a width of $width i
 
 // 4. Temperature Converter //
 
-$temp_celsius = readline("Enter temperature in Celsius: ")
+$temp_celsius = readline("Enter temperature in Celsius: ");
 $fahrenheit_conversion = ($temp_celsius * 1.8) + 32;
 echo "$temp_celsius is equivalent to $fahrenheit_conversion degrees fahrenheit.";
 
@@ -61,8 +61,37 @@ echo "Your BMI is $bmi";
 // 8. String Manipulation //
 
 
+$sentence = readline("Enter a sentence: ");
+
+$s_length = strlen($sentence);
+$s_word_count = str_word_count($sentence);
+$uppercase = strtoupper($sentence);
+$lowercase = strtolower($sentence);
+
+echo "Number of characters: $s_length \n";
+echo "Number of words: $s_word_count \n";
+echo "The sentence in uppercase: $uppercase \n";
+echo "The sentence in lowercase: $lowercase \n";
 
 // 9. Bank Account Simulation //
+
+$balance = 100000.00;
+$deposit = readline("Enter the amount for deposit");
+$withdraw = readline("Enter the amount for withdrawal: ");
+
+$transaction = readline("[a] Check balance\n [b] Deposit\n [c] Withdraw");
+switch ($transaction) {
+    case "a":
+        echo "Your balance is $balance";
+    case "b":
+        $deposit_computation = $balance + $withdraw;
+        echo "Your new balance is $withdraw_computation";
+    case "c":
+        $withdraw_computation = $balance - $withdraw;
+        echo "Your new balance is $withdraw_computation";
+}
+
+//redo//
 
 
 // 10. Simple Grading System //
@@ -97,7 +126,9 @@ $usd = $php * 58.24;
 $eur = $php * 68.24;
 $jpy = $php * 0.39;
 
+echo "$php in PHP is equal to $usd in USD, $eur in EUR, and $jpy in JPY.";
 // 12. Travel Cost Estimator //
 
 $distance = readline("enter distance to be travelled: ");
+
 ?>
