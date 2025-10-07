@@ -98,4 +98,6 @@ $eur = $php * 68.24;
 $jpy = $php * 0.39;
 
 // 12. Travel Cost Estimator //
+
+$distance = readline("enter distance to be travelled: ");
 ?>
