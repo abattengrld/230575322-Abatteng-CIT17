@@ -1,198 +1,224 @@
 <?php
-
-echo"1. Introduce yourself\n";
-
-$name = "Rhona";
-$age = 21;
-$fav_color = "white";
-
-echo "My name is $name, I am $age years old, and my favorite color is $fav_color \n";
-
-echo "---\n";
+$exercise = $_GET["exercise"] ?? null;
 
 
-echo" 2. Simple Math\n";
+switch ($exercise) {
 
-$a = readline("Enter a number: ");
-$b = readline("Enter a second number: ");
-$sum = $a + $b;
-$difference = $a - $b;
-$product = $a * $b;
-$quotient = $a / $b;
-
-echo "The computations between the two numbers are as follows: \n Sum: $sum \n Difference: $difference \n Product: $product \n Quotient: $quotient \n";
-
-echo "---\n";
-
-
-echo"3. Area and Perimeter of a Rectangle\n";
-
-$length = readline("Enter length of the rectangle: ");
-$width = readline("Enter width of the rectangle: ");
-$perimeter = 2 * ($length + $width);
-$area = $length * $width;
-echo "The perimeter of a rectangle with the length of $length and a width of $width is $perimeter. \n";
-echo "The area of a rectangle with the length of $length and a width of $width is $area. \n";
-
-echo "---\n";
-
-
-echo "4. Temperature Converter \n";
-
-$temp_celsius = readline("Enter temperature in Celsius: ");
-$fahrenheit_conversion = ($temp_celsius * 1.8) + 32;
-
-echo "$temp_celsius is equivalent to $fahrenheit_conversion degrees fahrenheit.\n";
-
-echo "---\n";
-
-
-echo "5. Swapping variables\n";
-
-$swap = readline("Enter a number: ");
-$swap2 = readline("Enter a number to be swapped with the previous one.: ");
-
-echo "Before swapping, the first number is equal to $swap, the second is equal to $swap2\n";
-
-$temp = $swap;
-$swap = $swap2;
-$swap2 = $temp;
-
-echo "After swapping,the first number is now equal to $swap, the second is equal to $swap2\n";
-
-
-
-echo"6. Salary Calculator\n";
-
-$basic_salary = readline("Enter basic salary: ");
-$allowance = readline("Enter allowance: ");
-$deductions = readline("Enter deductions: ");
-$gross_salary = $basic_salary + $allowance;
-$net_salary = $gross_salary - $deductions;
-
-echo "Your net salary is $net_salary. \n";
-
-echo "---\n";
-
-
-echo"7. BMI Calculator \n";
-
-$height = readline("Enter height in meters: ");
-$weight = readline("Enter weight in kilograms: ");
-$bmi = $weight / ($height ** 2);
-
-echo "Your BMI is $bmi. \n";
-
-echo "---\n";
-
-
-
-echo"8. String Manipulation\n";
-
-$sentence = readline("Enter a sentence: ");
-
-$s_length = strlen($sentence);
-$s_word_count = str_word_count($sentence);
-$uppercase = strtoupper($sentence);
-$lowercase = strtolower($sentence);
-
-echo "\nNumber of characters: $s_length \n";
-echo "Number of words: $s_word_count \n";
-echo "The sentence in uppercase: $uppercase \n";
-echo "The sentence in lowercase: $lowercase \n";
-
-echo "---\n";
-
-
-
-echo"9. Bank Account Simulation\n";
-
-$balance = 100000.00;
-
-while (true) {
-    $transaction = readline("[a] Check balance\n[b] Deposit\n[c] Withdraw\n[d] Exit\nChoose an option: ");
-
-    switch ($transaction) {
-        case "a":
-            echo "Your balance is $balance\n";
-            break;
-
-        case "b":
-            $deposit = readline("Enter deposit amount: ");
-            $balance += $deposit;
-            echo "Your new balance is $balance\n";
-            break;
-
-        case "c":
-            $withdraw = readline("Enter withdrawal amount: ");
-            $balance -= $withdraw;
-            echo "Your new balance is $balance\n";
-            break;
-
-        case "d":
-            echo "Exit.";
-            exit;
-
-        default:
-            echo "Invalid. Please choose between the following only.\n";
+case "1. Introduce Yourself": ?>
+    <form method="POST">
+        Name: <input type="text" name="name"><br><br>
+        Age: <input type="number" name="age"><br><br>
+        Favorite Color: <input type="text" name="color"><br><br>
+        <input type="submit" value="Submit">
+    </form>
+    <?php
+    if ($_POST) {
+        $name = $_POST["name"];
+        $age = $_POST["age"];
+        $color = $_POST["color"];
+        echo "<p>My name is $name, I am $age years old, and my favorite color is $color.</p>";
     }
+    break;
+
+case "2. Simple Math": ?>
+    <form method="POST">
+        Number 1: <input type="number" name="a"><br><br>
+        Number 2: <input type="number" name="b"><br><br>
+        <input type="submit" value="Calculate">
+    </form>
+    <?php
+    if ($_POST) {
+        $a = $_POST["a"];
+        $b = $_POST["b"];
+        echo "<p>Sum: " . ($a + $b) . "<br><br>
+              Difference: " . ($a - $b) . "<br><br>
+              Product: " . ($a * $b) . "<br><br>
+              Quotient: " . ($b != 0 ? $a / $b : "undefined") . "</p>";
+    }
+    break;
+
+case "3. Area and Perimeter of a Rectangle": ?>
+    <form method="POST">
+        Length: <input type="number" name="length"><br><br>
+        Width: <input type="number" name="width"><br><br>
+        <input type="submit" value="Compute">
+    </form>
+    <?php
+    if ($_POST) {
+        $l = $_POST["length"];
+        $w = $_POST["width"];
+        echo "<p>Area: " . ($l * $w) . "<br>Perimeter: " . (2 * ($l + $w)) . "</p>";
+    }
+    break;
+
+case "4. Temperature Converter": ?>
+    <form method="POST">
+        Celsius: <input type="number" name="celsius"><br><br>
+        <input type="submit" value="Convert">
+    </form>
+    <?php
+    if ($_POST) {
+        $c = $_POST["celsius"];
+        echo "<p>$c°C = " . (($c * 1.8) + 32) . "°F</p>";
+    }
+    break;
+
+case "5. Swapping Variables": ?>
+    <form method="POST">
+        Value 1: <input type="number" name="val1"><br><br>
+        Value 2: <input type="number" name="val2"><br><br>
+        <input type="submit" value="Swap">
+    </form>
+    <?php
+    if ($_POST) {
+        $v1 = $_POST["val1"];
+        $v2 = $_POST["val2"];
+        echo "<p>Before: v1 = $v1, v2 = $v2<br><br>";
+        $temp = $v1; $v1 = $v2; $v2 = $temp;
+        echo "After: v1 = $v1, v2 = $v2</p><br>";
+    }
+    break;
+
+case "6. Salary Calculator": ?>
+    <form method="POST">
+        Basic Salary: <input type="number" name="basic_salary"><br><br>
+        Allowance: <input type="number" name="allowance"><br><br>
+        Deduction: <input type="number" name="deduction"><br><br>
+        <input type="submit" value="Compute">
+    </form>
+    <?php
+    if ($_POST) {
+        $gross = $_POST["basic_salary"] + $_POST["allowance"];
+        $net = $gross - $_POST["deduction"];
+        echo "<p>Net Salary: ₱$net</p>";
+    }
+    break;
+
+case "7. BMI Calculator": ?>
+    <form method="POST">
+        Weight (kg): <input type="number" name="weight" step="0.01"><br><br>
+        Height (m): <input type="number" name="height" step="0.01"><br><br>
+        <input type="submit" value="Calculate">
+    </form>
+    <?php
+    if ($_POST) {
+        $bmi = $_POST["weight"] / ($_POST["height"] ** 2);
+        echo "<p>Your BMI: " . round($bmi, 2) . "</p>";
+    }
+    break;
+
+case "8. String Manipulation": ?>
+    <form method="POST">
+        Sentence: <input type="text" name="sentence" style="width:300px;"><br><br>
+        <input type="submit" value="Analyze">
+    </form>
+    <?php
+    if ($_POST) {
+        $s = $_POST["sentence"];
+        echo "<p>Characters: " . strlen($s) .
+             "<br>Words: " . str_word_count($s) .
+             "<br>Uppercase: " . strtoupper($s) .
+             "<br>Lowercase: " . strtolower($s) . "</p>";
+    }
+    break;
+
+case "9. Bank Account Simulation":
+    session_start();
+    if (!isset($_SESSION["balance"])) $_SESSION["balance"] = 100000;
+    ?>
+    <form method="POST">
+        <p>Balance: ₱<?php echo number_format($_SESSION["balance"], 2); ?></p>
+        <select name="action">
+            <option value="">--Choose Action--</option>
+            <option value="check">Check Balance</option>
+            <option value="deposit">Deposit</option>
+            <option value="withdraw">Withdraw</option>
+            <option value="reset">Reset Account</option>
+        </select><br><br>
+        Amount (if applicable): <input type="number" name="amount" step="0.01"><br><br>
+        <input type="submit" value="Submit">
+    </form>
+    <?php
+    if ($_POST) {
+        $action = $_POST["action"];
+        $amount = floatval($_POST["amount"] ?? 0);
+
+        switch ($action) {
+            case "check":
+                echo "<p>Your balance is ₱" . number_format($_SESSION["balance"], 2) . "</p>";
+                break;
+            case "deposit":
+                $_SESSION["balance"] += $amount;
+                echo "<p>Deposited ₱$amount. New balance: ₱" . number_format($_SESSION["balance"], 2) . "</p>";
+                break;
+            case "withdraw":
+                if ($amount > $_SESSION["balance"]) {
+                    echo "<p style='color:red;'>Insufficient funds.</p>";
+                } else {
+                    $_SESSION["balance"] -= $amount;
+                    echo "<p>Withdrawn ₱$amount. New balance: ₱" . number_format($_SESSION["balance"], 2) . "</p>";
+                }
+                break;
+            case "reset":
+                $_SESSION["balance"] = 100000;
+                echo "<p>Account reset to ₱100,000.00</p>";
+                break;
+            default:
+                echo "<p>Please select an action.</p>";
+        }
+    }
+    break;
+
+case "10. Simple Grading System": ?>
+    <form method="POST">
+        Math: <input type="number" name="math"><br>
+        English: <input type="number" name="english"><br>
+        Science: <input type="number" name="science"><br>
+        <input type="submit" value="Compute">
+    </form>
+    <?php
+    if ($_POST) {
+        $avg = ($_POST["math"] + $_POST["english"] + $_POST["science"]) / 3;
+        $grade = "F";
+        if ($avg >= 90) $grade = "A";
+        elseif ($avg >= 85) $grade = "B";
+        elseif ($avg >= 80) $grade = "C";
+        elseif ($avg >= 75) $grade = "D";
+        echo "<p>Average: " . round($avg, 2) . " → Grade: $grade</p>";
+    }
+    break;
+
+case "11. Currency Converter": ?>
+    <form method="POST">
+        Amount in PHP: <input type="number" name="php" step="0.01"><br>
+        <input type="submit" value="Convert">
+    </form>
+    <?php
+    if ($_POST) {
+        $php = $_POST["php"];
+        echo "<p>$php PHP = " .
+             round($php / 58.24, 2) . " USD, " .
+             round($php / 68.24, 2) . " EUR, " .
+             round($php / 0.39, 2) . " JPY</p>";
+    }
+    break;
+
+case "12. Travel Cost Estimator": ?>
+    <form method="POST">
+        Distance (km): <input type="number" name="distance"><br><br>
+        Fuel Consumption (km/L): <input type="number" name="consumption"><br><br>
+        Fuel Price (per L): <input type="number" name="price"><br><br>
+        <input type="submit" value="Estimate">
+    </form>
+    <?php
+    if ($_POST) {
+        $fuel_needed = $_POST["distance"] / $_POST["consumption"];
+        $cost = $fuel_needed * $_POST["price"];
+        echo "<p>Estimated Travel Cost: ₱" . round($cost, 2) . "</p>";
+    }
+    break;
+
+default:
+    echo "<p>Invalid exercise selected.</p>";
 }
-
-echo "---\n";
-
-
-echo"10. Simple Grading System\n";
-
-$math = readline("Enter grade in Math: ");
-$science = readline("Enter grade in Science: ");
-$english = readline("Enter grade in English: ");
-$average = ($math + $science + $english) / 3;
-
-echo "\nThe average is $average";
-
-if($average >= 90) {
-    echo " with a grade of A.";
-}
-elseif($average >= 85) {
-    echo " with a grade of B.";
-}
-elseif($average >= 80) {
-    echo " with a grade of C.";
-}
-elseif($average >= 75) {
-    echo " with a grade of D.";
-}
-else {
-    echo " with a failing grade.";
-}
-
-echo "\n---\n";
-
-
-
-echo"11. Currency Converter\n";
-
-$php = readline("Enter amount of money in Philippine Peso: ");
-$usd = $php * 58.24;
-$eur = $php * 68.24;
-$jpy = $php * 0.39;
-
-echo "\n $php in PHP is equal to $usd in USD, $eur in EUR, and $jpy in JPY.";
-
-echo "---\n";
-
-
-echo"12. Travel Cost Estimator\n";
-
-$distance = readline("Enter the distance to be traveled in kilometers: ");
-$fuel_consumption = readline("Enter the fuel consumption in kilometers per liter): ");
-$fuel_price = readline("Enter the fuel price per liter: ");
-
-$fuel_required = $distance / $fuel_consumption;
-
-$travel_cost = $fuel_required * $fuel_price;
-
-// Display the estimated travel cost
-echo "The estimated travel cost for your trip is: $travel_cost\n";
-
 ?>
